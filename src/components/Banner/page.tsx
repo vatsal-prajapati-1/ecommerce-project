@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import Search from "@/components/Search/page";
 
 const Banner = () => {
   return (
@@ -36,19 +37,17 @@ const Banner = () => {
           </div>
         </div>
       </div>
-      <div className="header">
+      <div className="header py-3">
         <div className="container flex items-center justify-between">
-          <div className="col1">
+          <div className="col1 w-[25%]">
             <Link href="/">
-            <Image src="/logo" alt="shopping logo" />
+              <Image src="/logo.png" alt="ILYAHIKA" width={150} height={50} />
             </Link>
           </div>
-          <div className="col2">
-          
+          <div className="col2 w-[45%]">
+            <Search />
           </div>
-          <div className="col3">
-
-          </div>
+          <div className="col3 w-[30%]"></div>
         </div>
       </div>
     </header>
