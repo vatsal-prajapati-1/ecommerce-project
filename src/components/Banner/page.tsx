@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Search from "@/components/Search/page";
+import NavBar from "@/components/NavBar/page";
 
 const Banner = () => {
   return (
@@ -37,7 +38,7 @@ const Banner = () => {
           </div>
         </div>
       </div>
-      <div className="header py-3">
+      <div className="header py-4 border-b-[1px] border-gray-250">
         <div className="container flex items-center justify-between">
           <div className="col1 w-[25%]">
             <Link href="/">
@@ -47,10 +48,31 @@ const Banner = () => {
           <div className="col2 w-[45%]">
             <Search />
           </div>
-          <div className="col3 w-[30%]"></div>
+          <div className="col3 w-[30%] flex items-center pl-7">
+            <ul className="flex items-center gap-3 w-full">
+              <li className="list-none">
+                <Link
+                  href="/login"
+                  className="link transition text-[15px] font-[500]"
+                >
+                  Login
+                </Link>{" "}
+                | &nbsp;
+                <Link
+                  href="/register"
+                  className="link transition text-[15px] font-[500]"
+                >
+                  Register
+                </Link>
+              </li>
+              <li>{/* adding some badge icon with pop notification  */}</li>
+            </ul>
+          </div>
         </div>
       </div>
-    </header>
+
+      <NavBar />
+  </header>
   );
 };
 

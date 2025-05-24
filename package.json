@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
+    "dev": "concurrently \"next dev --turbopack\" \"npx @tailwindcss/cli -i ./src/styles/style.css -o ./src/styles/globals.css --watch\"",
+    "build": "npx @tailwindcss/cli -i ./src/styles/style.css -o ./src/styles/globals.css && next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -12,6 +12,7 @@
     "@radix-ui/react-slot": "^1.2.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "concurrently": "^9.1.2",
     "lucide-react": "^0.511.0",
     "next": "15.3.2",
     "postcss": "^8.5.3",
