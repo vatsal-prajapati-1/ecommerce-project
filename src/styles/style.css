@@ -15,23 +15,17 @@
   --font-montserrat: var(--font-montserrat), ui-sans-serif, system-ui,
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
     "Noto Color Emoji";
-  --color-primary: #ff5252;
-  --background-primary: #ff5252;
-}
-
-@layer utilities {
-  body {
-    font-family: Arial, Helvetica, sans-serif;
-    font-optical-sizing: auto;
-    background: #f5f0f0;
-    color: rgba(0, 0, 0, 0.7);
-  }
+  --color-primary-custom: #ff5252;
+  --background-primary-custom: #ff5252;
+  --color-gray-250: #d4d4d4;
+  --border-color-gray-250: var(--color-gray-250);
 }
 
 @layer base {
-  :root {
-    --primary: #ff5252;
-    --primary: #ff5252;
+  body {
+    font-optical-sizing: auto;
+    background: #f5f0f0;
+    color: rgba(0, 0, 0, 0.7);
   }
 }
 
@@ -39,6 +33,4 @@
   color: #1f1f1f !important;
 }
 
-nav ul button {
-  text-transform: capitalize !important;
-}
+

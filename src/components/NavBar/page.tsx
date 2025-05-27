@@ -9,20 +9,20 @@ const NavBar = () => {
       <nav className="py-2">
         <div className="container flex items-center justify-end gap-8">
           <div className="col_1 w-[20%]">
-            <Button className="!text-black gap-2 w-full">
+            <Button className="!text-black gap-2 w-full shadow-none">
               {" "}
               <AlignLeft className="text-[18px]" /> Shop By Categories
               <ChevronDown className="text-[13px] ml-auto font-bold" />
             </Button>
           </div>
           <div className="col_2 w-[60%]">
-            <ul className="flex items-center gap-3">
+            <ul className="flex items-center gap-2">
               <li className="list-none">
                 <Link
                   href="/"
                   className="link transition text-[14px] font-[500]"
                 >
-                  <Button className="link transition !font-[500] !text-[rgba(0,0,0,0.7)] hover:!text-[#000000]">
+                  <Button className="link transition !font-[500] !text-[rgba(0,0,0,0.8)] hover:!text-[#ff5252] capitalize shadow-none">
                     Home
                   </Button>
                 </Link>
@@ -32,7 +32,9 @@ const NavBar = () => {
                   href="/"
                   className="link transition text-[14px] font-[500]"
                 >
-                  Fashion
+                  <Button className="link transition !font-[500] !text-[rgba(0,0,0,0.8)] hover:!text-[#ff5252] capitalize shadow-none">
+                    Fashion
+                  </Button>
                 </Link>
               </li>
               <li className="list-none">
@@ -40,7 +42,9 @@ const NavBar = () => {
                   href="/"
                   className="link transition text-[14px] font-[500]"
                 >
-                  Electronics
+                  <Button className="link transition !font-[500] !text-[rgba(0,0,0,0.8)] hover:!text-[#ff5252] capitalize shadow-none">
+                    Electronics
+                  </Button>
                 </Link>
               </li>
               <li className="list-none">
@@ -48,7 +52,9 @@ const NavBar = () => {
                   href="/"
                   className="link transition text-[14px] font-[500]"
                 >
-                  Bags
+                  <Button className="link transition !font-[500] !text-[rgba(0,0,0,0.8)] hover:!text-[#ff5252] capitalize shadow-none">
+                    Bags
+                  </Button>
                 </Link>
               </li>
               <li className="list-none">
@@ -56,7 +62,9 @@ const NavBar = () => {
                   href="/"
                   className="link transition text-[14px] font-[500]"
                 >
-                  Footwear
+                  <Button className="link transition !font-[500] !text-[rgba(0,0,0,0.8)] hover:!text-[#ff5252] capitalize shadow-none">
+                    Footwear
+                  </Button>
                 </Link>
               </li>
               <li className="list-none">
@@ -64,7 +72,9 @@ const NavBar = () => {
                   href="/"
                   className="link transition text-[14px] font-[500]"
                 >
-                  Groceries
+                  <Button className="link transition !font-[500] !text-[rgba(0,0,0,0.8)] hover:!text-[#ff5252] capitalize shadow-none">
+                    Groceries
+                  </Button>
                 </Link>
               </li>
               <li className="list-none">
@@ -72,7 +82,9 @@ const NavBar = () => {
                   href="/"
                   className="link transition text-[14px] font-[500]"
                 >
-                  Beauty
+                  <Button className="link transition !font-[500] !text-[rgba(0,0,0,0.8)] hover:!text-[#ff5252] capitalize shadow-none">
+                    Beauty
+                  </Button>
                 </Link>
               </li>
               <li className="list-none">
@@ -80,7 +92,9 @@ const NavBar = () => {
                   href="/"
                   className="link transition text-[14px] font-[500]"
                 >
-                  Wellness
+                  <Button className="link transition !font-[500] !text-[rgba(0,0,0,0.8)] hover:!text-[#ff5252] capitalize shadow-none">
+                    Wellness
+                  </Button>
                 </Link>
               </li>
               <li className="list-none">
@@ -88,7 +102,9 @@ const NavBar = () => {
                   href="/"
                   className="link transition text-[14px] font-[500]"
                 >
-                  Jewellery
+                  <Button className="link transition !font-[500] !text-[rgba(0,0,0,0.8)] hover:!text-[#ff5252] capitalize shadow-none">
+                    Jewellery
+                  </Button>
                 </Link>
               </li>
             </ul>

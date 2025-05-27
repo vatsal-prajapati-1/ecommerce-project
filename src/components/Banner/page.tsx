@@ -6,7 +6,7 @@ import NavBar from "@/components/NavBar/page";
 const Banner = () => {
   return (
     <header>
-      <div className="top-strip py-2 border-t-[1px] border-gray-250 border-b-[1px]">
+      <div className="py-2 border-t-[1px] border-b-[1px] border-gray-250">
         <div className="container">
           <div className="flex items-center justify-between">
             <div className="col1-[50%]">
@@ -72,7 +72,7 @@ const Banner = () => {
       </div>
 
       <NavBar />
-  </header>
+    </header>
   );
 };
 
