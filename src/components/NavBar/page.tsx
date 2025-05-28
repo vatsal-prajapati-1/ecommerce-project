@@ -1,4 +1,4 @@
-import { AlignLeft, ChevronDown, Rocket } from "lucide-react";
+import { Rocket } from "lucide-react";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import CategoryPanel from "@/components/NavBar/CategoryPanel/page";
@@ -9,11 +9,7 @@ const NavBar = () => {
       <nav className="py-2">
         <div className="container flex items-center justify-end gap-8">
           <div className="col_1 w-[20%]">
-            <Button className="!text-black gap-2 w-full shadow-none">
-              {" "}
-              <AlignLeft className="text-[18px]" /> Shop By Categories
-              <ChevronDown className="text-[13px] ml-auto font-bold" />
-            </Button>
+            <CategoryPanel />
           </div>
           <div className="col_2 w-[60%]">
             <ul className="flex items-center gap-2">
@@ -117,9 +113,6 @@ const NavBar = () => {
           </div>
         </div>
       </nav>
-
-      {/* {category pannel components} */}
-      <CategoryPanel />
     </>
   );
 };
