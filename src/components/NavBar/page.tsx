@@ -2,8 +2,24 @@ import { Rocket } from "lucide-react";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import CategoryPanel from "@/components/NavBar/CategoryPanel/page";
+import DropdownMenu from "./DropdownMenu/page";
 
 const NavBar = () => {
+  const fashionItems = [
+    { title: "Men's Fashion", href: "/fashion/men" },
+    { title: "Women's Fashion", href: "/fashion/women" },
+    { title: "Kids' Fashion", href: "/fashion/kids" },
+    { title: "Accessories", href: "/fashion/accessories" },
+  ];
+
+  const electronicsItems = [
+    { title: "Smartphones", href: "/electronics/smartphones" },
+    { title: "Laptops", href: "/electronics/laptops" },
+    { title: "Gaming", href: "/electronics/gaming" },
+    { title: "Audio", href: "/electronics/audio" },
+    { title: "Wearables", href: "/electronics/wearables" },
+  ];
+
   return (
     <>
       <nav className="py-2">
@@ -23,25 +39,28 @@ const NavBar = () => {
                   </Button>
                 </Link>
               </li>
-              <li className="list-none">
+              <li className="list-none relative group">
                 <Link
-                  href="/"
+                  href="/fashion"
                   className="link transition text-[14px] font-[500]"
                 >
                   <Button className="link transition !font-[500] !text-[rgba(0,0,0,0.8)] hover:!text-[#ff5252] capitalize shadow-none">
                     Fashion
                   </Button>
                 </Link>
+                <DropdownMenu items={fashionItems} />
               </li>
-              <li className="list-none">
+
+              <li className="list-none relative group">
                 <Link
-                  href="/"
+                  href="/electronics"
                   className="link transition text-[14px] font-[500]"
                 >
                   <Button className="link transition !font-[500] !text-[rgba(0,0,0,0.8)] hover:!text-[#ff5252] capitalize shadow-none">
                     Electronics
                   </Button>
                 </Link>
+                <DropdownMenu items={electronicsItems} />
               </li>
               <li className="list-none">
                 <Link

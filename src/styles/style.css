@@ -33,4 +33,41 @@
   color: #1f1f1f !important;
 }
 
+.banner-swiper {
+  width: 100%;
+}
 
+.banner-swiper .swiper-pagination {
+  bottom: 20px !important;
+}
+
+.banner-swiper .swiper-pagination-bullet {
+  width: 12px !important;
+  height: 12px !important;
+  background: rgba(255, 255, 255, 0.5) !important;
+  opacity: 1 !important;
+  margin: 0 4px !important;
+}
+
+.banner-swiper .swiper-pagination-bullet-active {
+  background: white !important;
+  transform: scale(1.2);
+}
+
+/* Smooth transitions */
+.banner-swiper .swiper-slide {
+  transition: all 0.3s ease;
+}
+
+/* Navigation button hover effects */
+.banner-button-prev:hover,
+.banner-button-next:hover {
+  transform: scale(1.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .banner-swiper {
+    height: 320px !important;
+  }
+}
