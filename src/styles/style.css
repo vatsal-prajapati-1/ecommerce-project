@@ -26,6 +26,7 @@
     font-optical-sizing: auto;
     background: #f5f0f0;
     color: rgba(0, 0, 0, 0.7);
+    overflow-x: hidden;
   }
 }
 
@@ -33,41 +34,66 @@
   color: #1f1f1f !important;
 }
 
-.banner-swiper {
-  width: 100%;
+.slider-home {
+  overflow: inherit !important;
 }
 
-.banner-swiper .swiper-pagination {
-  bottom: 20px !important;
+.swiper-button-prev,
+.swiper-button-next {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 100%;
+  width: 45px;
+  height: 45px;
+  min-width: 45px;
+  box-shadow: 0 1px 3px #0000001f, 0 1px 2px #0000003d !important;
 }
 
-.banner-swiper .swiper-pagination-bullet {
-  width: 12px !important;
-  height: 12px !important;
-  background: rgba(255, 255, 255, 0.5) !important;
-  opacity: 1 !important;
-  margin: 0 4px !important;
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 22px !important;
+  color: #000;
 }
 
-.banner-swiper .swiper-pagination-bullet-active {
-  background: white !important;
-  transform: scale(1.2);
+.product-slider {
+  overflow: inherit !important;
 }
 
-/* Smooth transitions */
-.banner-swiper .swiper-slide {
-  transition: all 0.3s ease;
+.product-slider .swiper-button-prev,
+.product-slider .swiper-button-next {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
 }
 
-/* Navigation button hover effects */
-.banner-button-prev:hover,
-.banner-button-next:hover {
+.product-slider .swiper-button-prev::after,
+.product-slider .swiper-button-next::after {
+  font-size: 16px !important;
+}
+
+.product-slider .swiper-button-prev {
+  left: -10px !important;
+}
+.product-slider .swiper-button-next {
+  right: -10px !important;
+}
+
+.product-slider .item {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.product-slider .swiper-button-prev:hover,
+.product-slider .swiper-button-next:hover {
+  background-color: #ff5252 !important;
+}
+
+.product-slider .swiper-button-prev:hover::after,
+.product-slider .swiper-button-next:hover::after {
+  color: #fff !important;
+}
+
+.product-slider .item:hover img {
   transform: scale(1.1);
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .banner-swiper {
-    height: 320px !important;
-  }
 }
