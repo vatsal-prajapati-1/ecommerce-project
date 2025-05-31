@@ -1,7 +1,10 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import Search from "@/components/Search/page";
 import NavBar from "@/components/NavBar/page";
+import IconWithBadge from "@/components/IconWithBadge/page";
+import { Repeat, Heart, ShoppingCart } from "lucide-react";
 
 const Banner = () => {
   return (
@@ -65,7 +68,13 @@ const Banner = () => {
                   Register
                 </Link>
               </li>
-              <li>{/* adding some badge icon with pop notification  */}</li>
+              <li>
+                <div style={{ display: "flex", gap: "2rem", padding: "2rem" }}>
+                  <IconWithBadge icon={<Repeat size={30} />} count={0} />
+                  <IconWithBadge icon={<Heart size={30} />} count={0} />
+                  <IconWithBadge icon={<ShoppingCart size={30} />} count={1} />
+                </div>
+              </li>
             </ul>
           </div>
         </div>
