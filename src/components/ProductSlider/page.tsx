@@ -32,6 +32,14 @@ const products = [
     price: "$199.99",
     category: "Electronics",
   },
+  {
+    id: 3,
+    name: "Smart Watch",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMl3kMXE4jgnoWxjrcmusaydVKsxuDUt8gaw&s",
+    price: "$199.99",
+    category: "Electronics",
+  },
 ];
 
 const ProductSlider = () => {
@@ -45,8 +53,8 @@ const ProductSlider = () => {
           navigation
           className="mySwiper"
         >
-          {products.map((product) => (
-            <SwiperSlide key={product.id}>
+          {products.map((product, index) => (
+            <SwiperSlide key={index}>
               <Link href={`/product/${product.id}`}>
                 <div className="item p-3 bg-white rounded-sm text-center flex items-center justify-center flex-col">
                   <Image
