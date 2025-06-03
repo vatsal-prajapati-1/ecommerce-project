@@ -30,6 +30,17 @@
   }
 }
 
+::-webkit-scrollbar {
+  width: 8px !important;
+  height: 8px !important;
+}
+::-webkit-scrollbar-thumb {
+  background: #ff5252;
+}
+::-webkit-scrollbar-track {
+  background: #fff;
+}
+
 .searchBox input::placeholder {
   color: #1f1f1f !important;
 }
@@ -96,4 +107,17 @@
 
 .product-slider .item:hover img {
   transform: scale(1.1);
+}
+
+.banner-slider .swiper-button-prev,
+.banner-slider .swiper-button-next {
+  width: 30px !important;
+  height: 30px !important;
+  min-width: 30px !important;
+  top: 55% !important;
+}
+
+.banner-slider .swiper-button-prev::after,
+.banner-slider .swiper-button-next::after {
+  font-size: 18px !important;
 }

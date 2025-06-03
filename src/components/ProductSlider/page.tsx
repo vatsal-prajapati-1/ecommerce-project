@@ -18,7 +18,7 @@ const products = [
   },
   {
     id: 2,
-    name: "Wireless Earbuds",
+    name: "Smart Watch",
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMl3kMXE4jgnoWxjrcmusaydVKsxuDUt8gaw&s",
     price: "$99.99",
@@ -33,18 +33,74 @@ const products = [
     category: "Electronics",
   },
   {
-    id: 3,
-    name: "Smart Watch",
+    id: 4,
+    name: "Wireless Earbuds",
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMl3kMXE4jgnoWxjrcmusaydVKsxuDUt8gaw&s",
-    price: "$199.99",
+    price: "$129.99",
+    category: "Electronics",
+  },
+  {
+    id: 5,
+    name: "Smart Speaker",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMl3kMXE4jgnoWxjrcmusaydVKsxuDUt8gaw&s",
+    price: "$79.99",
+    category: "Electronics",
+  },
+  {
+    id: 6,
+    name: "Laptop",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMl3kMXE4jgnoWxjrcmusaydVKsxuDUt8gaw&s",
+    price: "$999.99",
+    category: "Electronics",
+  },
+  {
+    id: 7,
+    name: "Gaming Console",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMl3kMXE4jgnoWxjrcmusaydVKsxuDUt8gaw&s",
+    price: "$499.99",
+    category: "Electronics",
+  },
+  {
+    id: 8,
+    name: "Digital Camera",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMl3kMXE4jgnoWxjrcmusaydVKsxuDUt8gaw&s",
+    price: "$399.99",
+    category: "Electronics",
+  },
+  {
+    id: 9,
+    name: "Fitness Tracker",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMl3kMXE4jgnoWxjrcmusaydVKsxuDUt8gaw&s",
+    price: "$89.99",
+    category: "Electronics",
+  },
+  {
+    id: 10,
+    name: "Bluetooth Speaker",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMl3kMXE4jgnoWxjrcmusaydVKsxuDUt8gaw&s",
+    price: "$69.99",
+    category: "Electronics",
+  },
+  {
+    id: 11,
+    name: "Smart TV",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMl3kMXE4jgnoWxjrcmusaydVKsxuDUt8gaw&s",
+    price: "$799.99",
     category: "Electronics",
   },
 ];
 
 const ProductSlider = () => {
   return (
-    <div className="product-slider">
+    <div className="product-slider py-8 pt-8">
       <div className="container">
         <Swiper
           modules={[Navigation, Pagination]}
