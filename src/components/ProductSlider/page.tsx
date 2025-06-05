@@ -10,90 +10,66 @@ import Image from "next/image";
 const products = [
   {
     id: 1,
-    name: "Smart Tablet",
+    name: "Fashion",
     image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMl3kMXE4jgnoWxjrcmusaydVKsxuDUt8gaw&s",
+      "https://serviceapi.spicezgold.com/download/1748409729550_fash.png",
     price: "$299.99",
     category: "Electronics",
   },
   {
     id: 2,
-    name: "Smart Watch",
+    name: "Electronics",
     image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMl3kMXE4jgnoWxjrcmusaydVKsxuDUt8gaw&s",
+      "https://serviceapi.spicezgold.com/download/1741660988059_ele.png",
     price: "$99.99",
     category: "Electronics",
   },
   {
     id: 3,
-    name: "Smart Watch",
+    name: "Bags",
     image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMl3kMXE4jgnoWxjrcmusaydVKsxuDUt8gaw&s",
+      "https://serviceapi.spicezgold.com/download/1741661045887_bag.png",
     price: "$199.99",
     category: "Electronics",
   },
   {
     id: 4,
-    name: "Wireless Earbuds",
+    name: "Footwear",
     image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMl3kMXE4jgnoWxjrcmusaydVKsxuDUt8gaw&s",
+      "https://serviceapi.spicezgold.com/download/1741661061379_foot.png",
     price: "$129.99",
     category: "Electronics",
   },
   {
     id: 5,
-    name: "Smart Speaker",
+    name: "Groceries",
     image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMl3kMXE4jgnoWxjrcmusaydVKsxuDUt8gaw&s",
+      "https://serviceapi.spicezgold.com/download/1741661077633_gro.png",
     price: "$79.99",
     category: "Electronics",
   },
   {
     id: 6,
-    name: "Laptop",
+    name: "Beauty",
     image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMl3kMXE4jgnoWxjrcmusaydVKsxuDUt8gaw&s",
+      "https://serviceapi.spicezgold.com/download/1741661092792_beauty.png",
     price: "$999.99",
     category: "Electronics",
   },
   {
     id: 7,
-    name: "Gaming Console",
+    name: "Wellness",
     image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMl3kMXE4jgnoWxjrcmusaydVKsxuDUt8gaw&s",
+      "https://serviceapi.spicezgold.com/download/1741661105893_well.png",
     price: "$499.99",
     category: "Electronics",
   },
   {
     id: 8,
-    name: "Digital Camera",
+    name: "Jewellery",
     image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMl3kMXE4jgnoWxjrcmusaydVKsxuDUt8gaw&s",
+      "https://serviceapi.spicezgold.com/download/1749118107671_Screenshot2024-05-19221016.png",
     price: "$399.99",
-    category: "Electronics",
-  },
-  {
-    id: 9,
-    name: "Fitness Tracker",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMl3kMXE4jgnoWxjrcmusaydVKsxuDUt8gaw&s",
-    price: "$89.99",
-    category: "Electronics",
-  },
-  {
-    id: 10,
-    name: "Bluetooth Speaker",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMl3kMXE4jgnoWxjrcmusaydVKsxuDUt8gaw&s",
-    price: "$69.99",
-    category: "Electronics",
-  },
-  {
-    id: 11,
-    name: "Smart TV",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMl3kMXE4jgnoWxjrcmusaydVKsxuDUt8gaw&s",
-    price: "$799.99",
     category: "Electronics",
   },
 ];

@@ -1,3 +1,6 @@
+"use client";
+import ScrollableTabs from "@/components/ScrollableTab/page";
+
 const BannerProduct = () => {
   return (
     <section className="bg-white py-8">
@@ -9,6 +12,7 @@ const BannerProduct = () => {
               Do not miss the current offers until the end of March.
             </p>
           </div>
+          <ScrollableTabs />
         </div>
       </div>
     </section>
