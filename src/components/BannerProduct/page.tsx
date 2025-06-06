@@ -1,5 +1,6 @@
 "use client";
 import ScrollableTabs from "@/components/ScrollableTab/page";
+import ProductBannerSlider from "@/components/ProductBannerSlider/page";
 
 const BannerProduct = () => {
   return (
@@ -12,8 +13,12 @@ const BannerProduct = () => {
               Do not miss the current offers until the end of March.
             </p>
           </div>
-          <ScrollableTabs />
+          <div className="rightSec w-[60%]">
+            <ScrollableTabs />
+          </div>
         </div>
+
+        <ProductBannerSlider />
       </div>
     </section>
   );

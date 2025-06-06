@@ -68,7 +68,7 @@ const products = [
     id: 8,
     name: "Jewellery",
     image:
-      "https://serviceapi.spicezgold.com/download/1749118107671_Screenshot2024-05-19221016.png",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6kxp8JR1Syq_16ZV8ger19z-3AOTTydmEiA&s",
     price: "$399.99",
     category: "Electronics",
   },
