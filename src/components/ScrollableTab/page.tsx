@@ -41,7 +41,7 @@ const ScrollableTab = () => {
 
   const scroll = (dir: "left" | "right") => {
     if (!scrollRef.current) return;
-    const distance = 200;
+    const distance = 250;
     scrollRef.current.scrollBy({
       left: dir === "left" ? -distance : distance,
       behavior: "auto",
@@ -85,7 +85,7 @@ const ScrollableTab = () => {
                   ? "text-[#ff5252]"
                   : "text-gray-700 hover:text-[#ff5252]"
               }`}
-            style={{ letterSpacing: "0.03em" }}
+            style={{ letterSpacing: "0.04em" }}
           >
             <span>{cat}</span>
             {active === idx && (

@@ -4,7 +4,7 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import ProductItem from "@/components/ProductItem/page";
+import ProductItem from "@/components/ProductBannerSlider/ProductItem/page";
 
 const ProductBannerSlider = () => {
   return (
