@@ -5,14 +5,14 @@ import Rating from "./Rating/page";
 import React, { useState, useEffect } from "react";
 
 const ProductItem = () => {
-  const [disabledRating, setDisabledRating] = useState<number>(2);
+  const [disabledRating, setDisabledRating] = useState<number>(2.5);
 
   useEffect(() => {
-    setDisabledRating(2);
+    setDisabledRating(2.5);
   }, []);
 
   return (
-    <div className="productItem rounded-md overflow-hidden border-1 border-[rgba(0,0,0,0.1)]">
+    <div className="productItem shadow-lg rounded-md overflow-hidden border-1 border-[rgba(0,0,0,0.1)]">
       <div className="imgWrapper w-[100%] h-[250px] overflow-hidden rounded-md">
         <Image
           src="https://serviceapi.spicezgold.com/download/1742463096955_hbhb1.jpg"
@@ -22,7 +22,7 @@ const ProductItem = () => {
           className="w-full"
         />
       </div>
-      <div className="info p-3">
+      <div className="info p-3 bg-[#f1f1f1]">
         <h6 className="text-[13px]">
           <Link href="/" className="link transition-all">
             Soylent Green
