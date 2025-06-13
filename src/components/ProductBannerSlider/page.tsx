@@ -8,7 +8,7 @@ import ProductItem from "@/components/ProductBannerSlider/ProductItem/page";
 
 const ProductBannerSlider = () => {
   return (
-    <div className="product-banner-slider py-5">
+    <div className="product-banner-slider py-4">
       <Swiper
         modules={[Navigation, Pagination]}
         spaceBetween={30}

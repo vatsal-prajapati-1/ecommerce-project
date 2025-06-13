@@ -146,7 +146,7 @@
 }
 
 .productItem .title {
-  line-height: 20px;
+  line-height: 18px;
 }
 
 .rating-container {
@@ -178,4 +178,10 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
+}
+
+.product-banner-slider .swiper-wrapper {
+  padding: 15px;
+  margin-left: 15px;
+  margin-right: 15px;
 }
