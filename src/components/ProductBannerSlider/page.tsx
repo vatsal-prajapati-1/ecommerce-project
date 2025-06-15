@@ -1,25 +1,28 @@
 "use client";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 import ProductItem from "@/components/ProductBannerSlider/ProductItem/page";
+import { Carousel, CarouselSlide } from "@/components/ui/carousel";
+import React from "react";
 
 const ProductBannerSlider = () => {
   return (
     <div className="product-banner-slider py-4">
-      <Swiper
-        modules={[Navigation, Pagination]}
+      <Carousel
         spaceBetween={30}
         slidesPerView={8}
-        navigation
+        navigation={true}
         className="mySwiper"
+        pagination={true}
       >
-        <SwiperSlide>
-            <ProductItem />
-        </SwiperSlide>
-      </Swiper>
+        <CarouselSlide>
+          <ProductItem />
+        </CarouselSlide>
+        <CarouselSlide>
+          <ProductItem />
+        </CarouselSlide>
+        <CarouselSlide>
+          <ProductItem />
+        </CarouselSlide>
+      </Carousel>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { Rocket } from "lucide-react";
-import { Button } from "../ui/button";
+import Button from "@/components/ui/button";
 import Link from "next/link";
 import CategoryPanel from "@/components/NavBar/CategoryPanel/page";
 import DropdownMenu from "./DropdownMenu/page";

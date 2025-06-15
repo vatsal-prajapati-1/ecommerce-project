@@ -1,11 +1,7 @@
 "use client";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 import Image from "next/image";
 import Link from "next/link";
+import { Carousel, CarouselSlide } from "../ui/carousel";
 
 const banners = [
   {
@@ -37,15 +33,15 @@ const banners = [
 const AdsBannerSlider = () => {
   return (
     <div className="py-5 w-full">
-      <Swiper
-        modules={[Navigation, Pagination]}
+      <Carousel
         spaceBetween={10}
         slidesPerView={4}
-        navigation
+        navigation={true}
+        pagination={true}
         className="banner-slider"
       >
         {banners.map((banner, index) => (
-          <SwiperSlide key={index} className="box">
+          <CarouselSlide key={index} className="box">
             <Link href={`/banner/${banner.id}`}>
               <div className="box bannerbox overflow-hidden rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group">
                 <Image
@@ -57,9 +53,9 @@ const AdsBannerSlider = () => {
                 />
               </div>
             </Link>
-          </SwiperSlide>
+          </CarouselSlide>
         ))}
-      </Swiper>
+      </Carousel>
     </div>
   );
 };

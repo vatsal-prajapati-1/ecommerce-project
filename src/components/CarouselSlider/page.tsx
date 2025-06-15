@@ -1,10 +1,6 @@
 "use client";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import Image from "next/image";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
+import { Carousel, CarouselSlide } from "@/components/ui/carousel";
 
 const images = [
   "https://serviceapi.spicezgold.com/download/1745503990603_NewProject(13).jpg",
@@ -16,18 +12,17 @@ const CarouselSlider = () => {
   return (
     <div className="py-4">
       <div className="container">
-        <Swiper
-          modules={[Navigation, Pagination, Autoplay]}
+        <Carousel
           spaceBetween={10}
           slidesPerView={1}
-          navigation
+          navigation={true}
           // pagination={{ clickable: true }}
           autoplay={{ delay: 3000 }}
           loop={true}
           className="slider-home"
         >
           {images.map((src, index) => (
-            <SwiperSlide key={index}>
+            <CarouselSlide key={index}>
               <div className="item rounded-[20px] overflow-hidden">
                 <Image
                   src={src}
@@ -44,9 +39,9 @@ const CarouselSlider = () => {
                   }}
                 />
               </div>
-            </SwiperSlide>
+            </CarouselSlide>
           ))}
-        </Swiper>
+        </Carousel>
       </div>
     </div>
   );
