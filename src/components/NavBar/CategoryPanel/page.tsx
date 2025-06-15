@@ -60,8 +60,8 @@ const CategoryPanel = () => {
   ];
 
   const toggleCategory = (categoryName: string) => {
-    setExpandedCategory(
-      expandedCategory === categoryName ? null : categoryName
+    setExpandedCategory((prev) =>
+      prev === categoryName ? null : categoryName
     );
   };
 
@@ -69,21 +69,24 @@ const CategoryPanel = () => {
     <Sheet>
       <SheetTrigger asChild>
         <Button className="!text-black gap-2 w-full shadow-none transition-colors duration-200">
-          <AlignLeft className="text-[18px]" /> Shop By Categories
-          <ChevronDown className="text-[13px] ml-auto font-bold" />
+          <AlignLeft className="text-[18px]" />
+          Shop By Categories
+          <ChevronDown className="text-[13px] ml-auto" />
         </Button>
       </SheetTrigger>
+
       <SheetContent
         side="left"
-        className="w-[400px] sm:w-[540px] p-0 bg-[#f5f0f0]"
+        className="w-[350px] sm:w-[420px] bg-[#f5f0f0] p-0"
       >
-        <SheetHeader className="p-6 border-t-[1px] border-b-[1px] border-gray-250 bg-[#f5f0f0]">
-          <SheetTitle className="text-[15px] font-[500] text-gray-800">
+        <SheetHeader className="p-5 border-b border-gray-300 bg-[#f5f0f0]">
+          <SheetTitle className="text-[16px] font-semibold text-gray-800">
             Shop by Categories
           </SheetTitle>
         </SheetHeader>
-        <div className="p-6 bg-[#f5f0f0]">
-          <div className="space-y-1">
+
+        <div className="px-5 py-4">
+          <div className="space-y-3">
             {categories.map((category) => (
               <div key={category.name}>
                 <div className="flex items-center justify-between">
@@ -93,41 +96,38 @@ const CategoryPanel = () => {
                   >
                     <Button
                       variant="ghost"
-                      className="w-full justify-between text-[14px] !font-[500] !text-[rgba(0,0,0,0.8)] hover:!text-[#ff5252] transition-colors duration-200 group capitalize shadow-none"
+                      className="w-full justify-start text-[15px] font-medium text-gray-800 hover:text-[#ff5252] transition-colors shadow-none capitalize"
                     >
-                      <span className="!text-[rgba(0,0,0,0.8)] group-hover:!text-[#ff5252] !font-[500] text-[14px] capitalize transition-colors duration-200">
-                        {category.name}
-                      </span>
+                      {category.name}
                     </Button>
                   </Link>
-                  <Button
-                    variant="ghost"
-                    size="icon"
+                  <button
                     onClick={() => toggleCategory(category.name)}
+                    className="p-1 focus:outline-none"
                   >
                     {expandedCategory === category.name ? (
                       <ChevronUp className="h-5 w-5 text-gray-500" />
                     ) : (
                       <ChevronDown className="h-5 w-5 text-gray-500" />
                     )}
-                  </Button>
+                  </button>
                 </div>
+
                 {expandedCategory === category.name && (
-                  <div className="pl-6 py-2 space-y-1">
-                    {category.subcategories.map((subcategory) => (
+                  <div className="mt-2 ml-4 space-y-2">
+                    {category.subcategories.map((sub) => (
                       <Link
-                        href={`/category/${category.name.toLowerCase()}/${subcategory
+                        key={sub}
+                        href={`/category/${category.name.toLowerCase()}/${sub
                           .toLowerCase()
-                          .replace(/'/g, "")}`}
-                        key={subcategory}
+                          .replace(/'/g, "")
+                          .replace(/\s+/g, "-")}`}
                       >
                         <Button
                           variant="ghost"
-                          className="w-full justify-start text-[14px] !font-[500] !text-[rgba(0,0,0,0.8)] hover:!text-[#ff5252] transition-colors duration-200 group capitalize shadow-none"
+                          className="w-full justify-start text-[14px] text-gray-700 hover:text-[#ff5252] capitalize shadow-none"
                         >
-                          <span className="!text-[rgba(0,0,0,0.8)] group-hover:!text-[#ff5252] !font-[500] text-[14px] capitalize transition-colors duration-200">
-                            {subcategory}
-                          </span>
+                          {sub}
                         </Button>
                       </Link>
                     ))}
