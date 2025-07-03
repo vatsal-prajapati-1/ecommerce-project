@@ -5,6 +5,7 @@ import React, {
   useEffect,
   useRef,
   useCallback,
+  Children,
   type ReactNode,
 } from "react";
 
@@ -58,15 +59,21 @@ export const Carousel: React.FC<CarouselProps> = ({
   const [currentSlidesPerView, setCurrentSlidesPerView] =
     useState(slidesPerView);
   const [currentSpaceBetween, setCurrentSpaceBetween] = useState(spaceBetween);
+  const [realIndex, setRealIndex] = useState(0);
+  const [transitionEnabled, setTransitionEnabled] = useState(true);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const autoplayRef = useRef<NodeJS.Timeout | null>(null);
+  const autoplayRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const isAutoplayPaused = useRef(false);
 
-  const slides = React.Children.toArray(children);
+  const slides = Children.toArray(children);
   const totalSlides = slides.length;
-  const maxIndex = Math.max(0, totalSlides - currentSlidesPerView);
+  const actualSlidesPerView =
+    typeof currentSlidesPerView === "number" ? currentSlidesPerView : 1;
+  const maxIndex = loop
+    ? totalSlides
+    : Math.max(0, totalSlides - actualSlidesPerView);
 
   // Handle responsive breakpoints
   useEffect(() => {
@@ -96,29 +103,49 @@ export const Carousel: React.FC<CarouselProps> = ({
     return () => window.removeEventListener("resize", handleResize);
   }, [breakpoints, slidesPerView, spaceBetween]);
 
-  // Update maxIndex when currentSlidesPerView changes
-  const currentMaxIndex = Math.max(0, totalSlides - currentSlidesPerView);
+  // Create slides with clones for seamless looping
+  const getExtendedSlides = useCallback(() => {
+    if (!loop || totalSlides === 0) return slides;
+
+    // Clone first and last slides for seamless looping
+    const firstSlide = slides[0];
+    const lastSlide = slides[totalSlides - 1];
+
+    return [lastSlide, ...slides, firstSlide];
+  }, [slides, loop, totalSlides]);
+
+  const extendedSlides = getExtendedSlides();
+  const extendedTotalSlides = extendedSlides.length;
+
+  // Initialize with proper starting position for loop
+  useEffect(() => {
+    if (loop && totalSlides > 0) {
+      // Start at index 1 (first real slide) when loop is enabled
+      setCurrentIndex(1);
+      setRealIndex(0);
+    }
+  }, [loop, totalSlides]);
 
   // Auto-play functionality
   useEffect(() => {
     if (!autoplay) return;
 
-    const delay = typeof autoplay === "object" ? autoplay.delay : 3000;
+    const delay =
+      typeof autoplay === "object"
+        ? (autoplay as { delay: number }).delay
+        : 3000;
     const disableOnInteraction =
-      typeof autoplay === "object" ? autoplay.disableOnInteraction : true;
+      typeof autoplay === "object"
+        ? (autoplay as { disableOnInteraction?: boolean })
+            .disableOnInteraction ?? true
+        : true;
 
     const startAutoplay = () => {
       if (autoplayRef.current) clearInterval(autoplayRef.current);
 
       autoplayRef.current = setInterval(() => {
         if (!isAutoplayPaused.current && !isDragging) {
-          setCurrentIndex((prev) => {
-            const nextIndex = prev + 1;
-            if (nextIndex > currentMaxIndex) {
-              return loop ? 0 : prev;
-            }
-            return nextIndex;
-          });
+          goToNext();
         }
       }, delay);
     };
@@ -130,16 +157,16 @@ export const Carousel: React.FC<CarouselProps> = ({
     return () => {
       if (autoplayRef.current) clearInterval(autoplayRef.current);
     };
-  }, [autoplay, currentMaxIndex, loop, isDragging]);
+  }, [autoplay, isDragging]);
 
   // Calculate transform
   const getTransform = useCallback(() => {
     if (!wrapperRef.current) return 0;
 
-    const slideWidth = wrapperRef.current.offsetWidth / currentSlidesPerView;
+    const slideWidth = wrapperRef.current.offsetWidth / actualSlidesPerView;
     const offset = currentIndex * (slideWidth + currentSpaceBetween);
 
-    if (centeredSlides && currentSlidesPerView < totalSlides) {
+    if (centeredSlides && actualSlidesPerView < totalSlides) {
       const centerOffset = (wrapperRef.current.offsetWidth - slideWidth) / 2;
       return centerOffset - offset;
     }
@@ -147,50 +174,120 @@ export const Carousel: React.FC<CarouselProps> = ({
     return -offset;
   }, [
     currentIndex,
-    currentSlidesPerView,
+    actualSlidesPerView,
     currentSpaceBetween,
     centeredSlides,
     totalSlides,
   ]);
 
-  // Navigation functions
+  // Navigation functions with seamless loop support
   const goToSlide = useCallback(
-    (index: number) => {
-      if (isTransitioning) return;
+    (index: number, immediate = false) => {
+      if (isTransitioning && !immediate) return;
 
-      let newIndex = index;
+      let targetIndex = index;
+
       if (loop) {
-        if (index < 0) newIndex = totalSlides - currentSlidesPerView;
-        else if (index > currentMaxIndex) newIndex = 0;
+        // For loop mode, we work with extended slides (including clones)
+        setCurrentIndex(targetIndex);
+        setRealIndex(
+          (((targetIndex - 1) % totalSlides) + totalSlides) % totalSlides
+        );
+
+        if (!immediate) {
+          setIsTransitioning(true);
+          setTransitionEnabled(true);
+
+          setTimeout(() => {
+            // Handle seamless loop transitions
+            if (targetIndex === 0) {
+              // We're at the cloned last slide, jump to real last slide
+              setTransitionEnabled(false);
+              setCurrentIndex(totalSlides);
+              setRealIndex(totalSlides - 1);
+            } else if (targetIndex === extendedTotalSlides - 1) {
+              // We're at the cloned first slide, jump to real first slide
+              setTransitionEnabled(false);
+              setCurrentIndex(1);
+              setRealIndex(0);
+            }
+
+            setIsTransitioning(false);
+
+            // Re-enable transitions after a brief delay
+            setTimeout(() => {
+              setTransitionEnabled(true);
+            }, 50);
+          }, speed);
+        }
       } else {
-        newIndex = Math.max(0, Math.min(index, currentMaxIndex));
+        // Non-loop mode
+        const currentMaxIndex = Math.max(0, totalSlides - actualSlidesPerView);
+        targetIndex = Math.max(0, Math.min(index, currentMaxIndex));
+        setCurrentIndex(targetIndex);
+        setRealIndex(targetIndex);
+
+        if (!immediate) {
+          setIsTransitioning(true);
+          setTimeout(() => setIsTransitioning(false), speed);
+        }
       }
 
-      setCurrentIndex(newIndex);
-      onSlideChange?.(newIndex);
-
-      if (newIndex === 0) onReachBeginning?.();
-      if (newIndex === currentMaxIndex) onReachEnd?.();
+      // Callbacks use real index
+      const callbackIndex = loop ? realIndex : targetIndex;
+      onSlideChange?.(callbackIndex);
+      if (callbackIndex === 0) onReachBeginning?.();
+      if (callbackIndex === totalSlides - 1) onReachEnd?.();
     },
     [
       isTransitioning,
       loop,
       totalSlides,
-      currentSlidesPerView,
-      currentMaxIndex,
+      actualSlidesPerView,
+      speed,
+      realIndex,
+      extendedTotalSlides,
       onSlideChange,
       onReachBeginning,
       onReachEnd,
     ]
   );
 
-  const goNext = useCallback(() => {
-    goToSlide(currentIndex + 1);
-  }, [currentIndex, goToSlide]);
+  const goToNext = useCallback(() => {
+    if (loop) {
+      const nextIndex = currentIndex + 1;
+      if (nextIndex >= extendedTotalSlides) {
+        goToSlide(1); // Jump to first real slide
+      } else {
+        goToSlide(nextIndex);
+      }
+    } else {
+      const currentMaxIndex = Math.max(0, totalSlides - actualSlidesPerView);
+      if (currentIndex < currentMaxIndex) {
+        goToSlide(currentIndex + 1);
+      }
+    }
+  }, [
+    currentIndex,
+    extendedTotalSlides,
+    totalSlides,
+    actualSlidesPerView,
+    loop,
+    goToSlide,
+  ]);
 
-  const goPrev = useCallback(() => {
-    goToSlide(currentIndex - 1);
-  }, [currentIndex, goToSlide]);
+  const goToPrev = useCallback(() => {
+    if (loop) {
+      const prevIndex = currentIndex - 1;
+      if (prevIndex < 0) {
+        goToSlide(totalSlides); // Jump to last real slide
+      } else {
+        goToSlide(prevIndex);
+      }
+    } else if (currentIndex > 0) {
+      goToSlide(currentIndex - 1);
+    }
+  }, [currentIndex, totalSlides, loop, goToSlide]);
 
   // Touch/Mouse events
   const handleStart = (clientX: number) => {
@@ -215,9 +312,9 @@ export const Carousel: React.FC<CarouselProps> = ({
     const threshold = 50;
     if (Math.abs(translateX) > threshold) {
       if (translateX > 0) {
-        goPrev();
+        goToPrev();
       } else {
-        goNext();
+        goToNext();
       }
     }
 
@@ -227,7 +324,7 @@ export const Carousel: React.FC<CarouselProps> = ({
     if (
       autoplay &&
       typeof autoplay === "object" &&
-      !autoplay.disableOnInteraction
+      !(autoplay as { disableOnInteraction?: boolean }).disableOnInteraction
     ) {
       isAutoplayPaused.current = false;
     }
@@ -282,17 +379,25 @@ export const Carousel: React.FC<CarouselProps> = ({
 
   // Ensure currentIndex doesn't exceed bounds when slides change
   useEffect(() => {
-    if (currentIndex > currentMaxIndex) {
-      setCurrentIndex(Math.max(0, currentMaxIndex));
+    if (!loop) {
+      const currentMaxIndex = Math.max(0, totalSlides - actualSlidesPerView);
+      if (currentIndex > currentMaxIndex) {
+        setCurrentIndex(Math.max(0, currentMaxIndex));
+      }
     }
-  }, [currentIndex, currentMaxIndex]);
+  }, [currentIndex, totalSlides, actualSlidesPerView, loop]);
 
-  const slideWidth = `${100 / currentSlidesPerView}%`;
+  const slideWidth = `${100 / actualSlidesPerView}%`;
   const transform = getTransform() + translateX;
 
   // Calculate pagination dots
-  const totalPages = Math.ceil(totalSlides / currentSlidesPerView);
-  const currentPage = Math.floor(currentIndex / currentSlidesPerView);
+  const totalPages = Math.ceil(totalSlides / actualSlidesPerView);
+  const currentPage = loop
+    ? Math.floor(realIndex / actualSlidesPerView)
+    : Math.floor(currentIndex / actualSlidesPerView);
+
+  // Use extended slides for loop, regular slides for non-loop
+  const slidesToRender = loop ? extendedSlides : slides;
 
   return (
     <div
@@ -318,15 +423,16 @@ export const Carousel: React.FC<CarouselProps> = ({
           className="flex transition-transform ease-out"
           style={{
             transform: `translateX(${transform}px)`,
-            transitionDuration: isDragging ? "0ms" : `${speed}ms`,
+            transitionDuration:
+              isDragging || !transitionEnabled ? "0ms" : `${speed}ms`,
             gap: `${currentSpaceBetween}px`,
           }}
           onTransitionStart={handleTransitionStart}
           onTransitionEnd={handleTransitionEnd}
         >
-          {slides.map((slide, index) => (
+          {slidesToRender.map((slide, index) => (
             <div
-              key={index}
+              key={loop ? `extended-${index}` : index}
               className="flex-shrink-0"
               style={{ width: slideWidth }}
             >
@@ -337,10 +443,10 @@ export const Carousel: React.FC<CarouselProps> = ({
       </div>
 
       {/* Navigation */}
-      {navigation && totalSlides > currentSlidesPerView && (
+      {navigation && totalSlides > actualSlidesPerView && (
         <>
           <button
-            onClick={goPrev}
+            onClick={goToPrev}
             disabled={!loop && currentIndex === 0}
             className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-gray-800 rounded-full p-2 shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-110"
             aria-label="Previous slide"
@@ -359,8 +465,11 @@ export const Carousel: React.FC<CarouselProps> = ({
             </svg>
           </button>
           <button
-            onClick={goNext}
-            disabled={!loop && currentIndex >= currentMaxIndex}
+            onClick={goToNext}
+            disabled={
+              !loop &&
+              currentIndex >= Math.max(0, totalSlides - actualSlidesPerView)
+            }
             className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-gray-800 rounded-full p-2 shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-110"
             aria-label="Next slide"
           >
@@ -386,7 +495,12 @@ export const Carousel: React.FC<CarouselProps> = ({
           {Array.from({ length: totalPages }).map((_, index) => (
             <button
               key={index}
-              onClick={() => goToSlide(index * currentSlidesPerView)}
+              onClick={() => {
+                const targetIndex = loop
+                  ? index + 1
+                  : index * actualSlidesPerView;
+                goToSlide(targetIndex);
+              }}
               className={`w-2 h-2 rounded-full transition-all duration-200 ${
                 currentPage === index
                   ? "bg-white scale-125 shadow-lg"
