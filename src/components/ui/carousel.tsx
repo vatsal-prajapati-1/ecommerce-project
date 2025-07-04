@@ -71,9 +71,6 @@ export const Carousel: React.FC<CarouselProps> = ({
   const totalSlides = slides.length;
   const actualSlidesPerView =
     typeof currentSlidesPerView === "number" ? currentSlidesPerView : 1;
-  const maxIndex = loop
-    ? totalSlides
-    : Math.max(0, totalSlides - actualSlidesPerView);
 
   // Handle responsive breakpoints
   useEffect(() => {
